@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Honor et Dignitas · Mercado de fichajes</title>
+<title>Mysting Team FC · Mercado de fichajes</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -119,8 +119,8 @@
     <symbol id="crest" viewBox="0 0 200 240">
       <path d="M100 6 L190 44 Q192 150 100 234 Q8 150 10 44 Z" fill="#fff"/>
       <path d="M100 18 L178 51 Q178 145 100 218 Q22 145 22 51 Z" fill="#0d0d12"/>
-      <text x="100" y="92" text-anchor="middle" font-family="Bebas Neue, Impact, sans-serif" font-size="46" fill="#fff" letter-spacing="2">HONOR</text>
-      <text x="100" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="11" fill="#fff" letter-spacing="2.5">ET DIGNITAS</text>
+      <text x="100" y="92" text-anchor="middle" font-family="Bebas Neue, Impact, sans-serif" font-size="34" fill="#fff" letter-spacing="1">MYSTING</text>
+      <text x="100" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="13" fill="#fff" letter-spacing="4">TEAM FC</text>
       <!-- Águila estilizada -->
       <path d="M70 190 Q58 150 78 128 Q96 112 122 120 L146 128 L128 134 Q134 140 128 146 L114 144 Q122 160 112 180 Q100 196 70 190 Z" fill="#fff"/>
       <path d="M122 120 L146 128 L128 134 Z" fill="#f2c14e"/>
@@ -134,7 +134,7 @@
 <header class="hero">
   <div class="wrap">
     <svg class="crest"><use href="#crest"/></svg>
-    <h1>HONOR <span>ET</span> DIGNITAS</h1>
+    <h1>MYSTING <span>TEAM</span> FC</h1>
     <div class="sub">Comunicados oficiales · Mercado de fichajes 26/27</div>
     <p class="lead">La Dirección Deportiva, tras una exhaustiva auditoría de lo que pasó la temporada pasada (mejor no hablar de ello), presenta a las nuevas incorporaciones del club. Ninguno ha jugado nunca con nosotros, y eso ya es una ventaja competitiva.</p>
     <span class="badge">7 fichajes · 0 € gastados · 0 lecciones aprendidas</span>
@@ -163,7 +163,7 @@
 
 <footer>
   <svg class="crest" viewBox="0 0 200 240"><use href="#crest"/></svg>
-  <div>Honor et Dignitas · Clubes Pro · Dirección Deportiva (o lo que queda de ella)</div>
+  <div>Mysting Team FC · Clubes Pro · Dirección Deportiva (o lo que queda de ella)</div>
   <div style="margin-top:6px;font-size:12px">Cualquier parecido con exjugadores reales es completamente intencionado.</div>
 </footer>
 
@@ -382,7 +382,7 @@ document.getElementById("signings").innerHTML = players.map((p,i)=>`
       <div class="meta"><strong>${p.first} ${p.last}</strong> · Dorsal ${p.num} · ${p.country}</div>
       ${p.body.map(t=>`<p>${t}</p>`).join("")}
       <p class="welcome">${p.welcome}</p>
-      <div class="sig">— La Dirección Deportiva de Honor et Dignitas</div>
+      <div class="sig">— La Dirección Deportiva del Mysting Team FC</div>
     </div>
   </article>`).join("");
 
