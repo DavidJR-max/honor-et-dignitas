@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Honor et Dignitas · Mercado de fichajes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0b1230; --navy2:#121c48; --kit:#1c2a72; --teal:#22c3a6; --teal2:#1a8f9e;
+    --gold:#f2c14e; --white:#f4f6fb; --muted:#9aa6c9; --red:#e2463f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:Inter,system-ui,sans-serif;color:var(--white);
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(34,195,166,.18), transparent 60%),
+      radial-gradient(900px 500px at -10% 30%, rgba(26,143,158,.15), transparent 60%),
+      var(--navy);
+    min-height:100vh; line-height:1.55;
+  }
+  .wrap{max-width:1150px;margin:0 auto;padding:0 20px}
+
+  /* ---------- HERO ---------- */
+  header.hero{padding:56px 0 30px;text-align:center;position:relative;overflow:hidden}
+  .hero .crest{width:150px;height:auto;filter:drop-shadow(0 10px 30px rgba(34,195,166,.35));animation:float 5s ease-in-out infinite}
+  @keyframes float{50%{transform:translateY(-8px)}}
+  .hero h1{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:clamp(48px,9vw,104px);letter-spacing:3px;line-height:.95;margin-top:14px}
+  .hero h1 span{color:var(--teal)}
+  .hero .sub{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:clamp(20px,3vw,30px);letter-spacing:6px;color:var(--muted)}
+  .hero p.lead{max-width:680px;margin:18px auto 0;color:#cfd6ee}
+  .badge{display:inline-block;margin-top:22px;padding:8px 16px;border:1px solid var(--teal);border-radius:999px;font-weight:800;font-size:13px;letter-spacing:2px;color:var(--teal);text-transform:uppercase}
+
+  /* ---------- TICKER ---------- */
+  .ticker{background:var(--teal);color:var(--navy);overflow:hidden;white-space:nowrap;font-weight:800;text-transform:uppercase;letter-spacing:1px;font-size:14px;margin:26px 0 0}
+  .ticker div{display:inline-block;padding:10px 0;animation:scroll 45s linear infinite}
+  .ticker span{margin:0 28px}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- LINEUP ---------- */
+  .section-title{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:44px;letter-spacing:2px;margin:56px 0 18px;display:flex;align-items:center;gap:14px}
+  .section-title::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--teal),transparent)}
+  .pitch{
+    position:relative;aspect-ratio:16/10;border-radius:18px;overflow:hidden;
+    background:repeating-linear-gradient(90deg,#16683f 0 10%,#1a7647 10% 20%);
+    border:3px solid rgba(255,255,255,.15);box-shadow:0 20px 50px rgba(0,0,0,.4)
+  }
+  .pitch svg.lines{position:absolute;inset:0;width:100%;height:100%}
+  .dot{position:absolute;transform:translate(-50%,-50%);text-align:center;text-decoration:none;color:#fff}
+  .dot b{display:grid;place-items:center;width:46px;height:46px;margin:0 auto;border-radius:50%;background:var(--kit);border:3px solid var(--teal);font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:24px;transition:transform .2s}
+  .dot.gk b{background:#38b23a;border-color:#fff}
+  .dot:hover b{transform:scale(1.15)}
+  .dot small{display:block;margin-top:4px;font-weight:800;font-size:12px;text-shadow:0 1px 4px #000;white-space:nowrap}
+  .dot.ghost b{background:rgba(255,255,255,.12);border:2px dashed rgba(255,255,255,.5);color:rgba(255,255,255,.7)}
+
+  /* ---------- SIGNINGS ---------- */
+  .signing{
+    display:grid;grid-template-columns:300px 1fr;gap:34px;align-items:start;
+    background:linear-gradient(135deg,rgba(28,42,114,.55),rgba(11,18,48,.8));
+    border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:30px;margin-bottom:30px;
+    position:relative;overflow:hidden;scroll-margin-top:20px
+  }
+  .signing::before{content:attr(data-num);position:absolute;right:-10px;top:-40px;font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:260px;color:rgba(255,255,255,.035);line-height:1;pointer-events:none}
+  .signing:nth-child(even){grid-template-columns:1fr 300px}
+  .signing:nth-child(even) .card{order:2}
+
+  /* Player card */
+  .card{
+    position:relative;width:300px;height:420px;border-radius:20px;overflow:hidden;
+    background:linear-gradient(160deg,#2b3d9a 0%,#121c48 55%,#0a1030 100%);
+    border:2px solid var(--gold);
+    box-shadow:0 0 0 6px rgba(242,193,78,.12),0 25px 50px rgba(0,0,0,.5);
+    transition:transform .35s
+  }
+  .card:hover{transform:rotate(-1.5deg) scale(1.02)}
+  .card.gk{background:linear-gradient(160deg,#2f9f3a 0%,#155c2a 55%,#0a2a14 100%)}
+  .card .shine{position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.12) 45%,transparent 60%);background-size:250% 100%;animation:shine 6s ease-in-out infinite}
+  @keyframes shine{0%,60%{background-position:120% 0}100%{background-position:-120% 0}}
+  .card .num{position:absolute;left:18px;top:14px;font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:64px;line-height:1;color:var(--gold)}
+  .card .pos{position:absolute;left:20px;top:76px;font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:26px;letter-spacing:1px}
+  .card .flag{position:absolute;left:20px;top:110px;width:38px;height:26px;border-radius:3px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+  .card .mini-crest{position:absolute;left:22px;top:146px;width:34px}
+  .card .avatar{position:absolute;right:-6px;top:18px;width:240px;height:290px}
+  .card .plate{position:absolute;left:0;right:0;bottom:0;padding:14px 16px 16px;background:linear-gradient(0deg,rgba(0,0,0,.65),rgba(0,0,0,.1));text-align:center;border-top:1px solid rgba(242,193,78,.5)}
+  .card .plate .first{font-size:12px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;font-weight:600}
+  .card .plate .last{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:36px;line-height:1;letter-spacing:1px}
+  .card .plate .stats{display:flex;justify-content:center;gap:12px;margin-top:6px;font-size:11px;font-weight:800;color:var(--gold);letter-spacing:.5px}
+  .card .stamp{position:absolute;right:14px;top:16px;transform:rotate(12deg);border:3px solid var(--red);color:var(--red);font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:20px;letter-spacing:2px;padding:2px 8px;border-radius:6px;background:rgba(0,0,0,.25)}
+
+  /* Communiqué */
+  .comm .kicker{font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--teal)}
+  .comm h2{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:clamp(38px,5vw,56px);line-height:1;letter-spacing:1px;margin:6px 0 4px}
+  .comm .meta{color:var(--muted);font-size:14px;margin-bottom:16px}
+  .comm .meta strong{color:var(--white)}
+  .comm p{margin-bottom:12px;color:#dde3f5}
+  .comm p.welcome{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:30px;letter-spacing:1px;color:var(--gold);margin-top:8px}
+  .sig{margin-top:14px;font-style:italic;color:var(--muted);font-size:14px}
+
+  footer{text-align:center;padding:50px 20px 60px;color:var(--muted);font-size:14px}
+  footer .crest{width:60px;opacity:.7;margin-bottom:10px}
+
+  @media (max-width:820px){
+    .signing,.signing:nth-child(even){grid-template-columns:1fr;padding:22px}
+    .signing:nth-child(even) .card{order:0}
+    .card{margin:0 auto}
+    .dot b{width:34px;height:34px;font-size:18px}
+    .dot small{font-size:10px}
+  }
+</style>
+</head>
+<body>
+
+<!-- Escudo recreado en SVG (reutilizable) -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="crest" viewBox="0 0 200 240">
+      <path d="M100 6 L190 44 Q192 150 100 234 Q8 150 10 44 Z" fill="#fff"/>
+      <path d="M100 18 L178 51 Q178 145 100 218 Q22 145 22 51 Z" fill="#0d0d12"/>
+      <text x="100" y="92" text-anchor="middle" font-family="Bebas Neue, Impact, sans-serif" font-size="46" fill="#fff" letter-spacing="2">HONOR</text>
+      <text x="100" y="112" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="11" fill="#fff" letter-spacing="2.5">ET DIGNITAS</text>
+      <!-- Águila estilizada -->
+      <path d="M70 190 Q58 150 78 128 Q96 112 122 120 L146 128 L128 134 Q134 140 128 146 L114 144 Q122 160 112 180 Q100 196 70 190 Z" fill="#fff"/>
+      <path d="M122 120 L146 128 L128 134 Z" fill="#f2c14e"/>
+      <path d="M128 134 Q118 138 108 136" stroke="#e2463f" stroke-width="3" fill="none"/>
+      <circle cx="118" cy="127" r="3" fill="#0d0d12"/>
+      <path d="M78 150 Q90 156 84 170 M88 140 Q100 148 94 162" stroke="#0d0d12" stroke-width="3" fill="none"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <svg class="crest"><use href="#crest"/></svg>
+    <h1>HONOR <span>ET</span> DIGNITAS</h1>
+    <div class="sub">Comunicados oficiales · Mercado de fichajes 26/27</div>
+    <p class="lead">La Dirección Deportiva, tras una exhaustiva auditoría de lo que pasó la temporada pasada (mejor no hablar de ello), presenta a las nuevas incorporaciones del club. Ninguno ha jugado nunca con nosotros, y eso ya es una ventaja competitiva.</p>
+    <span class="badge">7 fichajes · 0 € gastados · 0 lecciones aprendidas</span>
+  </div>
+  <div class="ticker"><div id="ticker"></div></div>
+</header>
+
+<main class="wrap">
+
+  <h2 class="section-title">El nuevo once (casi)</h2>
+  <div class="pitch" id="pitch">
+    <svg class="lines" viewBox="0 0 160 100" preserveAspectRatio="none">
+      <g fill="none" stroke="rgba(255,255,255,.55)" stroke-width=".4">
+        <rect x="3" y="3" width="154" height="94"/>
+        <line x1="80" y1="3" x2="80" y2="97"/>
+        <circle cx="80" cy="50" r="11"/>
+        <rect x="3" y="26" width="22" height="48"/><rect x="3" y="38" width="8" height="24"/>
+        <rect x="135" y="26" width="22" height="48"/><rect x="149" y="38" width="8" height="24"/>
+      </g>
+    </svg>
+  </div>
+
+  <h2 class="section-title">Comunicados oficiales</h2>
+  <section id="signings"></section>
+</main>
+
+<footer>
+  <svg class="crest" viewBox="0 0 200 240"><use href="#crest"/></svg>
+  <div>Honor et Dignitas · Clubes Pro · Dirección Deportiva (o lo que queda de ella)</div>
+  <div style="margin-top:6px;font-size:12px">Cualquier parecido con exjugadores reales es completamente intencionado.</div>
+</footer>
+
+<script>
+/* ================== DATOS DE LOS FICHAJES ================== */
+const players = [
+  {
+    id:"porrazoski", pos:"POR", posLong:"Portero", num:1, first:"El muro de Kiev", last:"PORRAZOSKI",
+    country:"Ucrania", flag:"ua", gk:true,
+    look:{skin:"#6b4630", hair:"curly", hairColor:"#1a1410"},
+    stats:["REF 99","MANOS 98","PELO 0 €"],
+    title:"Rescatado de la guerra para frenar la bancarrota",
+    body:[
+      "La Dirección Deportiva comunica que el club ha entrado oficialmente en <b>bancarrota</b>. La causa: los repetitivos cambios de look de <b>Poyamba</b> durante la pasada temporada. Rastas, rapado, tinte rubio, cresta, rastas otra vez… Solo en peluquería se fundió el presupuesto de tres temporadas y una parte del césped, que vendimos para pagar la última decoloración.",
+      "Sin un euro en caja, hemos tenido que rescatar al que será nuestro nuevo portero de un <b>equipo misterioso de la guerra de Ucrania</b>. Viene acostumbrado a que le lluevan cosas desde todos los ángulos, así que un córner de los nuestros le va a parecer un día de spa.",
+      "Su contrato incluye una cláusula muy clara: <b>prohibido cambiarse el peinado</b> sin el visto bueno de la junta directiva, de Hacienda y de un notario."
+    ],
+    welcome:"Bienvenido, PORRAZOSKI"
+  },
+  {
+    id:"brayaneitor", pos:"LI", posLong:"Lateral izquierdo", num:2, first:"Jorge", last:"BRAYANEITOR",
+    country:"Italia", flag:"it",
+    look:{skin:"#b9835a", hair:"bun", hairColor:"#1d1612"},
+    stats:["VEL 91","CENTROS 88","FALTAS ❌"],
+    title:"Llega de Italia un lateral sin crin y sin permiso para tirar faltas",
+    body:[
+      "Tras la salida de <b>Polvorita Flow Bacano</b>, el club ha subastado su coleta a una cuadra de Jerez. Por ella nos dieron tres sacos de pienso y un jinete en prácticas. Los mozos de cuadra dicen que es la mejor crin que han cepillado nunca.",
+      "Lo que no han podido vender son sus faltas directas. Siguen buscando los balones en la grada, en el aparcamiento y, según el último informe, en una urbanización de Sanlúcar. Él decía que <b>no fallaba, que era \"flow\"</b>.",
+      "Desde que se fue nuestro mediapunta del flow, nadie del vestuario se atreve a acercarse a un balón parado. Para el carril izquierdo llega desde Italia <b>Jorge Brayaneitor</b>, lateral de recorrido infinito. Lleva el pelo recogido en un moño de serie, así que no lo confundirán con un pura sangre. Además ha firmado por escrito que <b>nunca va a lanzar una falta</b>. Lo celebramos con champán… sin alcohol, que no da para más."
+    ],
+    welcome:"Benvenuto, BRAYANEITOR"
+  },
+  {
+    id:"anotop", pos:"LD", posLong:"Lateral derecho", num:4, first:"Anotop", last:"AT",
+    country:"Francia", flag:"fr",
+    look:{skin:"#3d2619", hair:"afro", hairColor:"#120d0a"},
+    stats:["RES 94","ENTRADA 87","SPF 50"],
+    title:"Comunicado sobre el paradero de El Moreno y fichaje para el lateral",
+    body:[
+      "Desde la Dirección Deportiva queremos aclarar los rumores sobre <b>El Moreno</b>. No se ha retirado. Se fue a tomar \"un poquito el sol\" a Chipiona en junio y la AEMET ya ha clasificado su bronceado como <b>fenómeno meteorológico</b>. Los socorristas lo usan de referencia para saber cuándo cerrar la playa.",
+      "En el último partido nocturno de la temporada pasada, el árbitro tuvo que pedirle que <b>sonriera para poder contar a los jugadores</b>. Tres compañeros siguen sin saber si llegó a jugar.",
+      "Para la banda derecha llega desde Francia <b>Anotop AT</b>, un lateral con pulmones de atleta y un afro que ya ha despejado dos balones de cabeza sin darse cuenta. El club le ha regalado un bote de crema solar de factor 50 por si acaso: no queremos perder a otro jugador en un chiringuito."
+    ],
+    welcome:"Bienvenue, ANOTOP AT"
+  },
+  {
+    id:"churrasco", pos:"DFC", posLong:"Defensa central", num:7, first:"Alejandro", last:"CHURRASCO",
+    country:"Inglaterra", flag:"en",
+    look:{skin:"#3a2418", hair:"braids", hairColor:"#120d0a"},
+    stats:["FUE 93","DEF 90","BRASA 99"],
+    title:"Er Feito pasa a la historia (por fin) y llega carne de primera",
+    body:[
+      "La Dirección Deportiva ha cerrado el análisis de datos de <b>Er Feito</b> en la temporada pasada: <b>0 goles, 4 autogoles (siendo delantero, que tiene mérito), 11 pases al rival</b> y una lesión subiendo al autobús. Nuestro analista dimitió a mitad del informe y ahora vende seguros. Dice que es más feliz.",
+      "Hemos intentado venderlo a otros clubes. Nadie lo quiere, ni gratis ni pagando nosotros. Al final ha fichado por un equipo de solteros contra casados, donde de momento lo tienen de suplente del suplente del aguador.",
+      "Como sus mejores jugadas acababan siempre en nuestra propia área, hemos decidido reforzar la defensa por si algún día vuelve: llega desde Inglaterra <b>Alejandro Churrasco</b>. Central de los de antes: si pasa el balón no pasa el delantero, y si pasa el delantero lo deja <b>a la brasa</b>. Por fin un defensa de nombre comestible y no incomible."
+    ],
+    welcome:"Welcome, CHURRASCO"
+  },
+  {
+    id:"pocachoncha", pos:"DFC", posLong:"Defensa central", num:6, first:"Princesa", last:"POCACHONCHA",
+    country:"Argentina", flag:"ar",
+    look:{skin:"#a4714c", hair:"bowl", hairColor:"#22180f"},
+    stats:["DEF 92","CABEZA 89","FLEQUILLO 99"],
+    title:"El vestuario vuelve a ser zona segura: adiós katana, hola Princesa",
+    body:[
+      "Comunicamos con alivio que <b>Er Katanazo</b> ha entregado su katana a la Guardia Civil tras la última sesión de \"entrenamiento\". Balance: dos redes de portería partidas en diagonal, el banquillo cortado en lonchas y un cono que, según testigos, <b>nunca vio venir el golpe</b>.",
+      "El seguro del club se negó a renovar la póliza cuando vio la palabra \"katana\" en el apartado de equipamiento deportivo. Nos han subido la cuota más que a un piso en el centro de Madrid.",
+      "La banda izquierda que ocupaba sigue precintada por la científica, así que de momento reforzamos la zaga: llega desde Argentina <b>Princesa Pocachoncha</b>, central elegante con un flequillo que corta más que cualquier espada. Su única arma es el corte limpio <b>al balón</b>, no a los compañeros. El vestuario ya ha pedido que se quede diez años."
+    ],
+    welcome:"¡Bienvenido, che, POCACHONCHA!"
+  },
+  {
+    id:"leroy", pos:"MDC", posLong:"Mediocentro defensivo", num:9, first:"Leroy", last:"MERLIN",
+    country:"Suecia", flag:"se",
+    look:{skin:"#e8c3a0", hair:"swept", hairColor:"#c9a463"},
+    stats:["INT 93","PASE 88","BRICOLAJE 99"],
+    title:"Fichaje de la manita sueca para reconstruir el club",
+    body:[
+      "Tras una temporada de desastres, el club necesitaba algo más que un mediocentro: necesitaba <b>un manitas</b>. La katana de <b>Er Katanazo</b> dejó el banquillo en serrín. Los balonazos de <b>Palomo de Jerez</b> rompieron 14 ventanas del vecindario. Y la coleta de <b>Polvorita</b> atascó todas las duchas del vestuario.",
+      "El único que no notó que no había banquillo fue <b>McPollo</b>, porque en toda la temporada <b>no se sentó ni una vez</b>: ni en el banquillo, ni en el autobús, ni en la cena de Navidad. También intentamos encargarle un casco a medida para su cabeza, pero la ferretería devolvió el pedido con una nota: <b>\"esa forma no viene en catálogo\"</b>.",
+      "Por eso hemos traído desde Suecia a <b>Leroy Merlin</b>, mediocentro defensivo que corta líneas de pase y además corta tablones a medida. Llega con caja de herramientas propia, taladro percutor y unas instrucciones de montaje que nadie del equipo es capaz de entender.",
+      "Ha firmado hasta 2030, pero ya ha avisado de que <b>monta la defensa en 15 minutos</b> y siempre le sobran dos tornillos. No preguntéis de dónde salen. Su primer encargo: un banquillo nuevo. McPollo ya ha dicho que no piensa estrenarlo."
+    ],
+    welcome:"Välkommen, LEROY MERLIN"
+  },
+  {
+    id:"gutiputon", pos:"MC", posLong:"Mediocentro", num:11, first:"Antonio", last:"GUTIPUTON",
+    country:"Francia", flag:"fr",
+    look:{skin:"#c79a74", hair:"messy", hairColor:"#1a1410"},
+    stats:["VIS 92","REG 90","BALONES PERDIDOS 0"],
+    title:"Los 10 millones se van en balones, y aun así hay fichaje",
+    body:[
+      "Aunque teníamos previsto un presupuesto de <b>10.000.000 €</b> para este mercado, hemos tenido que guardarlos para <b>comprar balones</b>. La culpa es de todos los balones que mandó fuera del campo el exjugador <b>Palomo de Jerez</b> cada vez que se quedaba solo delante del portero.",
+      "La NASA ha confirmado que <b>tres de esos balones siguen en órbita</b>. Uno aterrizó en el corral de un vecino de Jerez, que nos ha denunciado por daños a sus gallinas. Las gallinas ya no ponen huevos. Solo miran al cielo.",
+      "Por suerte, desde Francia llega gratis <b>Antonio Gutiputon</b>, mediocentro con visión de juego que tiene una costumbre revolucionaria: <b>dar el pase en vez de tirar a la grada</b>. El departamento de material ya ha llorado de emoción."
+    ],
+    welcome:"Bienvenue, GUTIPUTON"
+  }
+];
+
+/* Posiciones en el campo (x%, y%) */
+const pitchPos = {
+  porrazoski:[7,50], brayaneitor:[27,14], churrasco:[23,38], pocachoncha:[23,62], anotop:[27,86],
+  leroy:[42,50], gutiputon:[58,38]
+};
+const ghosts = [["?",60,64,"Se busca MC"],["?",78,22,"Se busca EI"],["?",88,50,"Se busca DC"],["?",78,78,"Se busca ED"]];
+
+/* ================== BANDERAS ================== */
+function flagSVG(code){
+  const f = {
+    it:`<rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#009246"/><rect x="2" width="1" height="2" fill="#ce2b37"/>`,
+    fr:`<rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#002395"/><rect x="2" width="1" height="2" fill="#ed2939"/>`,
+    ua:`<rect width="3" height="1" fill="#0057b7"/><rect y="1" width="3" height="1" fill="#ffd700"/>`,
+    se:`<rect width="3" height="2" fill="#006aa7"/><rect x=".9" width=".35" height="2" fill="#fecc00"/><rect y=".82" width="3" height=".36" fill="#fecc00"/>`,
+    ar:`<rect width="3" height="2" fill="#74acdf"/><rect y=".667" width="3" height=".667" fill="#fff"/><circle cx="1.5" cy="1" r=".2" fill="#f6b40e"/>`,
+    en:`<rect width="3" height="2" fill="#fff"/><rect x="1.3" width=".4" height="2" fill="#ce1124"/><rect y=".8" width="3" height=".4" fill="#ce1124"/>`
+  }[code];
+  return `<svg viewBox="0 0 3 2" width="100%" height="100%" preserveAspectRatio="none">${f}</svg>`;
+}
+
+/* ================== AVATAR RECREADO ================== */
+function hairSVG(style, c){
+  switch(style){
+    case "curly": return `
+      <g fill="${c}">${[[72,70],[84,58],[100,54],[116,58],[128,70],[78,62],[92,52],[108,52],[122,62],[66,82],[134,82]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="11"/>`).join("")}</g>`;
+    case "bun": return `
+      <circle cx="100" cy="40" r="16" fill="${c}"/>
+      <path d="M62 92 Q60 52 100 50 Q140 52 138 92 Q130 70 100 66 Q70 70 62 92Z" fill="${c}"/>
+      <g fill="${c}">${[[90,34],[110,34],[100,28]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="8"/>`).join("")}</g>`;
+    case "afro": return `
+      <circle cx="100" cy="70" r="54" fill="${c}"/>
+      <g fill="${c}">${Array.from({length:18},(_,i)=>{const a=Math.PI*(1+i/17);return `<circle cx="${100+54*Math.cos(a)}" cy="${72+50*Math.sin(a)}" r="10"/>`}).join("")}</g>`;
+    case "messy": return `
+      <path d="M62 90 Q58 54 100 50 Q142 54 138 90 Q132 72 120 70 L124 60 L110 68 L108 56 L96 68 L90 58 L84 70 Q70 72 62 90Z" fill="${c}"/>`;
+    case "swept": return `
+      <path d="M60 96 Q52 48 100 42 Q150 46 140 98 Q136 74 124 66 Q100 58 76 66 Q64 74 60 96Z" fill="${c}"/>
+      <path d="M76 60 Q100 46 128 58" stroke="#e3c58a" stroke-width="3" fill="none" opacity=".8"/>
+      <path d="M82 54 Q104 44 122 52" stroke="#a8843f" stroke-width="2" fill="none" opacity=".7"/>`;
+    case "bowl": return `
+      <path d="M60 100 Q54 50 100 46 Q146 50 140 100 L136 84 Q130 82 122 80 L118 86 L110 80 L102 86 L94 80 L86 86 L78 80 Q68 82 64 86Z" fill="${c}"/>`;
+    case "braids": return `
+      <path d="M62 88 Q60 52 100 50 Q140 52 138 88 Q130 70 100 68 Q70 70 62 88Z" fill="${c}"/>
+      <g stroke="#3a2a1e" stroke-width="1.5">${[74,86,100,114,126].map(x=>`<path d="M${x} ${x===100?52:56} Q${x} 64 ${x+(x-100)*.15} 72" fill="none"/>`).join("")}</g>`;
+  }
+  return "";
+}
+
+function avatarSVG(p){
+  const {skin,hair,hairColor} = p.look;
+  const gk = p.gk;
+  const kit = gk ? "#3bbf3b" : "#1c2a72";
+  const pid = "pat-"+p.id;
+  const back = hair==="afro" ? hairSVG(hair,hairColor) : "";
+  const front = hair!=="afro" ? hairSVG(hair,hairColor) : "";
+  return `
+  <svg class="avatar" viewBox="0 0 200 240">
+    <defs>
+      <pattern id="${pid}" width="22" height="16" patternUnits="userSpaceOnUse">
+        <path d="M0 14 L11 4 L22 14" fill="none" stroke="#22c3a6" stroke-width="2" opacity=".55"/>
+        <path d="M0 8 L11 -2 L22 8" fill="none" stroke="#3b5bd6" stroke-width="1.5" opacity=".6"/>
+      </pattern>
+      <linearGradient id="sh-${p.id}" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".25"/><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".3"/></linearGradient>
+    </defs>
+    ${back}
+    <!-- cuello -->
+    <rect x="86" y="118" width="28" height="30" rx="8" fill="${skin}"/>
+    <!-- cuerpo / camiseta -->
+    <path d="M28 240 Q26 170 60 156 L86 146 Q100 158 114 146 L140 156 Q174 170 172 240Z" fill="${kit}"/>
+    ${gk ? `<path d="M40 166 L160 166 L166 186 L34 186Z" fill="#7d7f86"/>`
+         : `<path d="M28 240 Q26 170 60 156 L86 146 Q100 158 114 146 L140 156 Q174 170 172 240Z" fill="url(#${pid})"/>`}
+    <path d="M28 240 Q26 170 60 156 L86 146 Q100 158 114 146 L140 156 Q174 170 172 240Z" fill="url(#sh-${p.id})"/>
+    <path d="M86 146 Q100 162 114 146" stroke="#fff" stroke-width="4" fill="none"/>
+    <!-- escudo pequeño -->
+    <use href="#crest" x="122" y="168" width="18" height="22"/>
+    <!-- dorsal en pecho -->
+    <text x="74" y="214" font-family="Bebas Neue, Impact" font-size="34" fill="#fff" text-anchor="middle" opacity=".92">${p.num}</text>
+    <!-- orejas + cabeza -->
+    <ellipse cx="62" cy="94" rx="7" ry="11" fill="${skin}"/>
+    <ellipse cx="138" cy="94" rx="7" ry="11" fill="${skin}"/>
+    <ellipse cx="100" cy="90" rx="38" ry="44" fill="${skin}"/>
+    <ellipse cx="100" cy="90" rx="38" ry="44" fill="url(#sh-${p.id})" opacity=".5"/>
+    <!-- cara -->
+    <path d="M80 82 Q87 78 94 82" stroke="#1b120c" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M106 82 Q113 78 120 82" stroke="#1b120c" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="87" cy="92" rx="4" ry="4.5" fill="#fff"/><circle cx="87.5" cy="92.5" r="2.6" fill="#1b120c"/>
+    <ellipse cx="113" cy="92" rx="4" ry="4.5" fill="#fff"/><circle cx="113.5" cy="92.5" r="2.6" fill="#1b120c"/>
+    <path d="M100 96 Q96 108 100 110 Q103 111 104 109" stroke="rgba(0,0,0,.35)" stroke-width="2" fill="none"/>
+    <path d="M89 118 Q100 124 111 118" stroke="#5a2e22" stroke-width="3" fill="none" stroke-linecap="round"/>
+    ${front}
+    ${gk ? `<g><path d="M36 240 L30 200 Q34 190 46 192 L52 240Z" fill="#1d1d22"/><path d="M164 240 L170 200 Q166 190 154 192 L148 240Z" fill="#1d1d22"/></g>` : ""}
+  </svg>`;
+}
+
+/* ================== RENDER ================== */
+const crestUse = `<svg class="mini-crest" viewBox="0 0 200 240"><use href="#crest"/></svg>`;
+
+document.getElementById("signings").innerHTML = players.map((p,i)=>`
+  <article class="signing" id="${p.id}" data-num="${p.num}">
+    <div class="card ${p.gk?"gk":""}">
+      <div class="num">${p.num}</div>
+      <div class="pos">${p.pos}</div>
+      <div class="flag">${flagSVG(p.flag)}</div>
+      ${crestUse}
+      ${avatarSVG(p)}
+      <div class="stamp">FICHADO</div>
+      <div class="plate">
+        <div class="first">${p.first}</div>
+        <div class="last">${p.last}</div>
+        <div class="stats">${p.stats.map(s=>`<span>${s}</span>`).join("")}</div>
+      </div>
+      <div class="shine"></div>
+    </div>
+    <div class="comm">
+      <div class="kicker">Comunicado oficial nº ${String(i+1).padStart(2,"0")} · ${p.posLong}</div>
+      <h2>${p.title}</h2>
+      <div class="meta"><strong>${p.first} ${p.last}</strong> · Dorsal ${p.num} · ${p.country}</div>
+      ${p.body.map(t=>`<p>${t}</p>`).join("")}
+      <p class="welcome">${p.welcome}</p>
+      <div class="sig">— La Dirección Deportiva de Honor et Dignitas</div>
+    </div>
+  </article>`).join("");
+
+const pitch = document.getElementById("pitch");
+pitch.insertAdjacentHTML("beforeend",
+  players.map(p=>{const [x,y]=pitchPos[p.id];
+    return `<a class="dot ${p.gk?"gk":""}" href="#${p.id}" style="left:${x}%;top:${y}%"><b>${p.num}</b><small>${p.last}</small></a>`}).join("") +
+  ghosts.map(([n,x,y,l])=>`<div class="dot ghost" style="left:${x}%;top:${y}%"><b>${n}</b><small>${l}</small></div>`).join("")
+);
+
+const news = [
+  "ÚLTIMA HORA: Poyamba se ha vuelto a cambiar el look",
+  "Encontrado un balón de Palomo de Jerez en Marte",
+  "Er Katanazo pide que le devuelvan la katana \"para cortar el jamón\"",
+  "Polvorita Flow Bacano ficha por un club hípico",
+  "El Moreno visto por última vez en Chipiona",
+  "Er Feito, suplente del aguador en un solteros contra casados",
+  "Leroy Merlin ya ha montado el banquillo nuevo (le sobran 2 tornillos)",
+  "McPollo sigue de pie: lleva 214 días sin sentarse",
+  "PORRAZOSKI: \"Aquí no llueven tantas cosas como en mi anterior equipo\""
+];
+const t = news.map(n=>`<span>⚽ ${n}</span>`).join("");
+document.getElementById("ticker").innerHTML = t + t;
+</script>
+</body>
+</html>
