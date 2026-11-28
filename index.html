@@ -32,6 +32,52 @@
   .hero h1 span{color:var(--teal)}
   .hero .sub{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:clamp(20px,3vw,30px);letter-spacing:6px;color:var(--muted)}
   .hero p.lead{max-width:680px;margin:18px auto 0;color:#cfd6ee}
+  .stats-link{display:inline-block;margin-top:14px;padding:10px 20px;border-radius:999px;background:var(--teal);color:var(--navy);font-weight:800;font-size:14px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:transform .2s}
+  .stats-link:hover{transform:translateY(-2px)}
+
+  /* ---------- CTA ESTADÍSTICAS ---------- */
+  .stats-cta{
+    display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;margin-top:40px;padding:26px 28px;
+    border-radius:22px;text-decoration:none;color:var(--white);position:relative;overflow:hidden;
+    background:linear-gradient(120deg,rgba(34,195,166,.28),rgba(28,42,114,.75) 55%,rgba(11,18,48,.9));
+    border:2px solid var(--teal);box-shadow:0 0 0 6px rgba(34,195,166,.08),0 20px 50px rgba(0,0,0,.45);
+    transition:transform .25s,box-shadow .25s
+  }
+  .stats-cta:hover{transform:translateY(-3px);box-shadow:0 0 0 8px rgba(34,195,166,.14),0 26px 60px rgba(0,0,0,.5)}
+  .stats-cta::before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.1) 50%,transparent 65%);background-size:250% 100%;animation:shine 5s ease-in-out infinite;pointer-events:none}
+  .stats-cta .new{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;font-size:11px;letter-spacing:2px;padding:3px 10px;border-radius:999px}
+  .stats-cta h2{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:clamp(36px,5vw,54px);letter-spacing:2px;line-height:1;margin:8px 0 6px}
+  .stats-cta h2 span{color:var(--teal)}
+  .stats-cta p{color:#cfd6ee;font-size:15px;max-width:560px}
+  .cta-nums{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+  .cta-nums div{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:8px 14px;min-width:86px}
+  .cta-nums b{display:block;font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:30px;line-height:1}
+  .cta-nums small{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+  .cta-go{display:grid;place-items:center;align-content:center;width:132px;height:132px;border-radius:50%;background:var(--teal);color:var(--navy);font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;text-align:center;line-height:1.2;animation:pulse 2.2s ease-in-out infinite}
+  .cta-go span{font-size:34px;display:block}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,195,166,.55)}60%{box-shadow:0 0 0 18px rgba(34,195,166,0)}}
+  /* ---------- COMUNICADO DE CRISIS ---------- */
+  .crisis{position:relative;overflow:hidden;margin-top:30px;padding:30px;border-radius:22px;
+    background:linear-gradient(135deg,rgba(226,70,63,.22),rgba(28,42,114,.55) 45%,rgba(11,18,48,.9));
+    border:2px solid rgba(226,70,63,.6);box-shadow:0 20px 50px rgba(0,0,0,.45)}
+  .crisis::before{content:"CRISIS";position:absolute;right:-20px;top:-34px;font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:200px;color:rgba(226,70,63,.08);line-height:1;pointer-events:none}
+  .crisis .tape{position:absolute;top:22px;right:-48px;transform:rotate(35deg);background:var(--red);color:#fff;font-weight:800;font-size:12px;letter-spacing:3px;padding:6px 60px;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+  .crisis .kicker{color:#ff8a84}
+  .crisis-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:18px 0 20px}
+  .crisis-stats div{background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 12px;text-align:center}
+  .crisis-stats b{display:block;font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:34px;line-height:1}
+  .crisis-stats small{font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}
+  .crisis-stats .bad b{color:#ff8a84} .crisis-stats .good b{color:var(--teal)}
+  .crisis h3{font-family:"Bebas Neue",Impact,"Arial Narrow",sans-serif;font-size:28px;letter-spacing:1px;margin:18px 0 8px;color:var(--gold)}
+  .crisis ul{list-style:none;display:grid;gap:8px;margin-bottom:12px}
+  .crisis li{padding:10px 14px 10px 40px;position:relative;background:rgba(255,255,255,.04);border-radius:10px;color:#dde3f5}
+  .crisis li::before{content:"📌";position:absolute;left:12px;top:10px}
+  .crisis .comm{max-width:860px}
+  .crisis a{color:var(--teal);font-weight:800}
+  @media (max-width:820px){.crisis{padding:22px 16px}.crisis .kicker{padding-right:64px}.crisis .tape{font-size:10px;right:-56px;top:16px}}
+  .fab{position:fixed;right:18px;bottom:18px;z-index:50;display:flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;background:var(--teal);color:var(--navy);font-weight:800;font-size:14px;letter-spacing:1px;text-transform:uppercase;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.45);animation:pulse 2.2s ease-in-out infinite;transition:opacity .3s,transform .3s}
+  .fab.hide{opacity:0;transform:translateY(20px);pointer-events:none}
+  @media (prefers-reduced-motion:reduce){.cta-go,.fab,.stats-cta::before{animation:none}}
   .badge{display:inline-block;margin-top:22px;padding:8px 16px;border:1px solid var(--teal);border-radius:999px;font-weight:800;font-size:13px;letter-spacing:2px;color:var(--teal);text-transform:uppercase}
 
   /* ---------- TICKER ---------- */
@@ -106,6 +152,11 @@
     .signing,.signing:nth-child(even){grid-template-columns:1fr;padding:22px}
     .signing:nth-child(even) .card{order:0}
     .card{margin:0 auto}
+    .stats-cta{grid-template-columns:1fr;padding:22px 18px;text-align:center}
+    .stats-cta p{margin:0 auto}
+    .cta-nums{justify-content:center}
+    .cta-go{margin:0 auto;width:auto;height:auto;border-radius:999px;padding:12px 22px;display:flex;gap:8px}
+    .cta-go span{font-size:20px}
     .dot b{width:34px;height:34px;font-size:18px}
     .dot small{font-size:10px}
   }
@@ -138,11 +189,59 @@
     <div class="sub">Comunicados oficiales · Mercado de fichajes 26/27</div>
     <p class="lead">La Dirección Deportiva, tras una exhaustiva auditoría de lo que pasó la temporada pasada (mejor no hablar de ello), presenta a las nuevas incorporaciones del club. Ninguno ha jugado nunca con nosotros, y eso ya es una ventaja competitiva.</p>
     <span class="badge">7 fichajes · 0 € gastados · 0 lecciones aprendidas</span>
+    <br><a class="stats-link" href="estadisticas.html">📊 Estadísticas del club</a>
   </div>
   <div class="ticker"><div id="ticker"></div></div>
 </header>
 
 <main class="wrap">
+
+  <a class="stats-cta" href="estadisticas.html" id="stats-cta">
+    <div>
+      <span class="new">NUEVO · DATOS REALES DE EA</span>
+      <h2>Estadísticas <span>del club</span></h2>
+      <p>Todos nuestros partidos, las notas de cada jugador, el pichichi, los MVPs y la plantilla al detalle. Y los del rival, para que no haya excusas.</p>
+      <div class="cta-nums" id="cta-nums"></div>
+    </div>
+    <div class="cta-go"><span>📊</span>Ver<br>estadísticas</div>
+  </a>
+
+  <h2 class="section-title">Última hora</h2>
+  <article class="crisis" id="crisis">
+    <div class="tape">URGENTE</div>
+    <div class="comm">
+      <div class="kicker">Comunicado oficial nº 08 · Situación deportiva</div>
+      <h2>La Junta Directiva convoca una reunión de crisis tras una racha «histórica»</h2>
+      <div class="meta"><strong>28 de noviembre de 2026</strong> · Sede social (el bar de enfrente) · Datos oficiales de EA</div>
+
+      <div class="crisis-stats">
+        <div><b>7</b><small>Partidos</small></div>
+        <div class="good"><b>1</b><small>Victoria</small></div>
+        <div class="bad"><b>6</b><small>Derrotas</small></div>
+        <div class="bad"><b>9-19</b><small>Goles</small></div>
+        <div class="bad"><b>6</b><small>Derrotas seguidas</small></div>
+        <div class="bad"><b>Div. 6</b><small>La última</small></div>
+      </div>
+
+      <p>La Junta Directiva del Mysting Team FC se ha reunido de urgencia en un grupo de WhatsApp que la mitad de sus miembros tiene silenciado. Los números hablan solos y, sinceramente, preferiríamos que se callaran: <b>7 partidos, 1 victoria y 6 derrotas</b>, <b>9 goles a favor y 19 en contra</b> y <b>6 derrotas seguidas</b>. El club está en la <b>División 6</b>, que es la última. Hemos preguntado a EA si existe una séptima. De momento, no.</p>
+      <p>Nuestra única victoria, un 2-0 ante <b>los lavapies</b>, también está bajo revisión: según los datos oficiales, nuestros jugadores marcaron <b>un solo gol</b>. El otro nos lo regalaron ellos. Dicho de otra forma: el rival que mejor ha jugado para el Mysting en toda la temporada fue el propio rival.</p>
+      <p>Después llegó el desplome: <b>tres 0-3 seguidos</b> ante AC MATONGE243, Peterbos e Italian Job. El de AC MATONGE243 duró 21 minutos porque alguien se desconectó; la investigación sigue abierta y todos los sospechosos culpan al router. Y el día que por fin marcamos 4 goles, contra FC BXT, encajamos 5, para que nadie se acostumbre a lo bueno.</p>
+      <p>Sobre la plantilla: <b>El Moreno</b> ha vuelto de Chipiona, pero se dejó la puntería en la arena: 17 tiros y 3 goles. <b>Guijo</b> lleva 5 goles y un <b>0% de victorias</b>, un récord que la NASA quiere estudiar junto a los balones en órbita. <b>Palomillo</b>, el antiguo Palomo de Jerez, ya no manda balones a la grada: ahora directamente no tira, y aun así es el <b>único MVP</b> del club. <b>J Eptein</b> y <b>POLVORAIN</b> han jugado 2 y 3 partidos; la directiva les ha enviado la ubicación del estadio por si se habían perdido.</p>
+
+      <h3>Medidas adoptadas</h3>
+      <ul>
+        <li>Queda prohibida la frase «el siguiente lo ganamos» en el vestuario hasta nueva orden.</li>
+        <li><b>Leroy Merlin</b> levantará un muro en nuestra portería. Ya le sobran dos ladrillos y no sabe de dónde salen.</li>
+        <li><b>Porrazoski</b> ha pedido volver a su anterior equipo: «allí al menos las cosas llovían desde un solo lado».</li>
+        <li>Se instala un contador de derrotas en el WISMACHISMOPARK. Va por el 6, y la directiva exige que nunca llegue a dos cifras.</li>
+        <li>Cada jugador tendrá que revisar sus <a href="estadisticas.html#vestuario">banderas rojas en el Vestuario</a>. Hay para todos.</li>
+      </ul>
+
+      <p>La Junta quiere transmitir tranquilidad a la afición: el proyecto sigue intacto, la confianza en el cuerpo técnico es total y el presidente no piensa dimitir, sobre todo porque nadie sabe quién es.</p>
+      <p class="welcome">¡Aúpa Mysting! (aunque sea de rodillas)</p>
+      <div class="sig">— La Junta Directiva del Mysting Team FC (en funciones, y probablemente por poco tiempo)</div>
+    </div>
+  </article>
 
   <h2 class="section-title">El nuevo once (casi)</h2>
   <div class="pitch" id="pitch">
@@ -394,6 +493,8 @@ pitch.insertAdjacentHTML("beforeend",
 );
 
 const news = [
+  "URGENTE: 6 derrotas seguidas, la Junta Directiva en reunión de crisis",
+  "Los lavapies nos marcan un gol a favor: única alegría de la temporada",
   "ÚLTIMA HORA: Poyamba se ha vuelto a cambiar el look",
   "Encontrado un balón de Palomo de Jerez en Marte",
   "Er Katanazo pide que le devuelvan la katana \"para cortar el jamón\"",
@@ -406,6 +507,25 @@ const news = [
 ];
 const t = news.map(n=>`<span>⚽ ${n}</span>`).join("");
 document.getElementById("ticker").innerHTML = t + t;
+
+/* ================== ACCESO A ESTADÍSTICAS ================== */
+/* Botón flotante: se oculta mientras el bloque grande de estadísticas está a la vista */
+document.body.insertAdjacentHTML("beforeend", `<a class="fab" id="fab" href="estadisticas.html">📊 Estadísticas</a>`);
+const fab = document.getElementById("fab");
+new IntersectionObserver(([e]) => fab.classList.toggle("hide", e.isIntersecting)).observe(document.getElementById("stats-cta"));
+
+/* Números en vivo del club dentro del bloque */
+fetch("data/club.json", {cache:"no-cache"}).then(r => r.ok ? r.json() : Promise.reject()).then(d => {
+  const o = d.club.overall, last = d.matches[0];
+  const top = [...d.members].sort((a,b) => b.goals - a.goals)[0];
+  const cell = (v, l) => `<div><b>${v}</b><small>${l}</small></div>`;
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  document.getElementById("cta-nums").innerHTML =
+    cell(o.gamesPlayed, "Partidos") +
+    cell(`${o.wins}-${o.ties}-${o.losses}`, "V-E-D") +
+    (last ? cell(`${last.us.goals}-${last.opp.goals}`, "Último · " + esc(last.opp.name).slice(0, 14)) : "") +
+    (top && top.goals ? cell(top.goals, "Pichichi · " + esc(top.proName || top.name)) : "");
+}).catch(() => {});
 </script>
 </body>
 </html>
